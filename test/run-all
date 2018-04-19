@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+echo "Running system tests"
+rake test:system
+echo "System tests successful"
+
+echo "======================="
+
+echo "Running Rails application tests"
+rake test
+echo "Rails application tests successful"
+
+echo "======================="
+
+echo "Running front-end tests"
+npm run test
+echo "Front end tests successful"
+
+echo "All tests completed successfully"

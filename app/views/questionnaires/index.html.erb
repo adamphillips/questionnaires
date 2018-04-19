@@ -1,0 +1,17 @@
+<h1>Questionnaires</h1>
+
+<% if @questionnaires.empty? %>
+  <p>There are no questionnaires configured</p>
+  <p>Visit <%= link_to 'the admin area', admin_url %> to set one up</p>
+<% else %>
+  <p>
+    Select a questionnaire to complete or visit <%= link_to 'the admin area', admin_url %> to
+    set up a new one.
+  </p>
+
+  <% @questionnaires.each do |questionnaire| %>
+    <p>
+      <%= link_to questionnaire.title, questionnaire_url(questionnaire) %>
+    </p>
+  <% end %>
+<% end %>
