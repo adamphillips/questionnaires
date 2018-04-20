@@ -1,8 +1,13 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 const Admin = () => {
   return(
-    <p>this is the admin area</p>
+    <div>
+      <Link to="/add-questionnaire">Add new</Link>
+      <p>this is the admin area</p>
+    </div>
   );
 };
 
