@@ -17,8 +17,8 @@ describe('<QuestionnaireForm />', () => {
     wrapper.setState({
       title: 'Some form',
       questions: [
-        { label: 'First question' },
-        { label: 'Second question' }
+        { label: 'First question', name: 'question_1' },
+        { label: 'Second question', name: 'question_2' }
       ]
     });
 
@@ -47,9 +47,9 @@ describe('<QuestionnaireForm />', () => {
     wrapper.setState({
       title: 'Some form',
       questions: [
-        { label: 'First question' },
-        { label: 'Second question' },
-        { label: 'Third question' }
+        { label: 'First question', name: 'question_1' },
+        { label: 'Second question', name: 'question_2' },
+        { label: 'Third question', name: 'question_3' }
       ]
     });
 
@@ -65,7 +65,7 @@ describe('<QuestionnaireForm />', () => {
     wrapper.setState({
       title: 'Some form',
       questions: [
-        { label: 'First question' }
+        { label: 'First question', name: 'question_1' }
       ]
     });
 
@@ -73,6 +73,27 @@ describe('<QuestionnaireForm />', () => {
 
     assert.equal(2, wrapper.state().questions.length);
     assert.equal('', wrapper.state().questions[1].label);
+  });
+
+  describe('validation', () => {
+    it('should add an error when a question name is not unique', () => {
+      const wrapper = mount(<QuestionnaireForm />);
+
+      wrapper.setState({
+        title: 'Some form',
+        questions: [
+          { label: 'First question', name: 'question_1' },
+          { label: 'Dupe first question', name: 'question_2' },
+          { label: 'Third question', name: 'question_3' }
+        ]
+      });
+
+      wrapper.find('input#question_name_2').simulate('change', {target: {value: 'question_1'}});
+
+      assert.equal(undefined, wrapper.state().questions[0].error);
+      assert.equal('Duplicate question name question_1', wrapper.state().questions[1].error);
+      assert.equal(undefined, wrapper.state().questions[2].error);
+    });
   });
 
   describe('saving the form', () => {
@@ -90,7 +111,7 @@ describe('<QuestionnaireForm />', () => {
       const formState = {
         title: 'Some form',
         questions: [
-          { label: 'First question' }
+          { label: 'First question', name: 'question_1' }
         ]
       };
 
