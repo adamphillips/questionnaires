@@ -4,20 +4,18 @@ import QuestionnaireQuestion from './QuestionnaireQuestion';
 import FormField from './FormField';
 import FormButton from './FormButton';
 
-const exampleState = {
+const defaultState = {
   isSaving: false,
   error: false,
-  title: 'Some questionnaire',
+  title: '',
   questions: [
-    { label: 'Hello', name: 'hello' },
-    { label: 'Goodbye', name: 'goodbye' }
   ]
 };
 
 class QuestionnaireForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = exampleState;
+    this.state = defaultState;
     this.addQuestion = this.addQuestion.bind(this);
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleQuestionChange = this.handleQuestionChange.bind(this);
