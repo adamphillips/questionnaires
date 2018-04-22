@@ -9,6 +9,7 @@ const defaultState = {
   error: false,
   title: '',
   questions: [
+    { label: '', name: '' }
   ]
 };
 
