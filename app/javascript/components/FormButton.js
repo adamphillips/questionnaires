@@ -11,7 +11,7 @@ const FormButton = (props) => {
 
 FormButton.propTypes = {
   label: PropTypes.string,
-  disabled: PropTypes.boolean
+  disabled: PropTypes.bool
 };
 
 export default FormButton;
