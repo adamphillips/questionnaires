@@ -7,7 +7,7 @@ class CreateQuestionnaireTest < ApplicationSystemTestCase
     visit '/admin'
     click_link 'Add new'
 
-    fill_in 'Name', with: 'Questionnaire 1'
+    fill_in 'Title', with: 'Questionnaire 1'
 
     fill_in 'Question 1', with: 'How are you?'
 

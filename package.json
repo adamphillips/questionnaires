@@ -27,6 +27,7 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "test": "NODE_ENV=test mocha-webpack test/javascript/**/*_test.js"
+    "test": "NODE_ENV=test mocha-webpack test/javascript/**/*_test.js",
+    "test:watch": "NODE_ENV=test mocha-webpack -w test/javascript/**/*_test.js"
   }
 }
