@@ -9,7 +9,7 @@ const QuestionnaireQuestion = (props) => {
 
   return(
     <div>
-      <h2>Question {props.index + 1}</h2>
+      <h2 className="h4">Question {props.index + 1}</h2>
 
       <div className='form-row'>
         <div className='col-md'>
