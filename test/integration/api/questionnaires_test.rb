@@ -3,11 +3,30 @@ require 'test_helper'
 module Api
   class QuestionnairesTest < ActionDispatch::IntegrationTest
     describe 'POST /api/questionnaires' do
-      it 'should return 200 status' do
-        post '/api/questionnaires'
+      let (:questionnaire_data) {
+        {
+          title: 'Some questionnaire',
+          questions: [
+            { label: 'First question' },
+            { label: 'Second question' }
+          ]
+        }
+      }
+
+      it 'should create a new questionnaire and return the questionnaire data as JSON' do
+        post '/api/questionnaires', params: { questionnaire: questionnaire_data }
+
         assert_equal 200, response.status
-        assert_equal 'Questionnaire created', JSON.parse(response.body)['message']
+
+        assert_equal 'Questionnaire created', json_response[:result][:message]
+
+        assert_equal 'Some questionnaire', json_response[:record][:title]
+        assert_equal Questionnaire.last.id, json_response[:record][:id]
       end
+    end
+
+    def json_response
+      JSON.parse(response.body).deep_symbolize_keys
     end
   end
 end

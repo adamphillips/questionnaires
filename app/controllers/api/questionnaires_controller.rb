@@ -3,8 +3,20 @@
 module Api
   class QuestionnairesController < ApplicationController
     def create
-      Rails.logger.info params.inspect
-      render json: {message: 'Questionnaire created'}
+      questionnaire = Questionnaire.create(questionnaire_params)
+
+      render json: {
+        result: {
+          message: 'Questionnaire created'
+        },
+        record: questionnaire
+      }
+    end
+
+    private
+
+    def questionnaire_params
+      params.require(:questionnaire).permit(:title, questions: [:label])
     end
   end
 end
