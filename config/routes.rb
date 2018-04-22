@@ -4,4 +4,8 @@ Rails.application.routes.draw do
   namespace :admin do
     get '(:path)' => 'home#index'
   end
+
+  namespace :api do
+    post 'questionnaires' => 'questionnaires#create'
+  end
 end
