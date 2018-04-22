@@ -3,17 +3,19 @@
 require 'application_system_test_case'
 
 class CreateQuestionnaireTest < ApplicationSystemTestCase
-  it 'should be possible to create a questionnaire' do
-    visit '/admin'
-    click_link 'Add new'
+  describe 'as an admin user' do
+    it 'should be possible to create a questionnaire' do
+      visit '/admin'
+      click_link 'Add new'
 
-    fill_in 'Title', with: 'Questionnaire 1'
+      fill_in 'Title', with: 'Questionnaire 1'
 
-    fill_in 'Question 1', with: 'How are you?'
+      fill_in 'Question 1', with: 'How are you?'
 
-    click_link 'Add question'
-    fill_in 'Question 2', with: 'What is your favourite colour?'
+      click_link 'Add question'
+      fill_in 'Question 2', with: 'What is your favourite colour?'
 
-    click_button 'Save'
+      click_button 'Save'
+    end
   end
 end
