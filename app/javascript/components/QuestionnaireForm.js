@@ -1,41 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const FormField = (props) => {
-  return(
-    <div className="form-group">
-      <label htmlFor={props.id}>{props.label}</label>
-      <input
-        type="text"
-        id={props.id}
-        name={props.id}
-        value={props.value}
-        onChange={props.onChange}
-        className="form-control"
-      />
-    </div>
-  );
-};
-
-FormField.propTypes = {
-  id: PropTypes.string,
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
-};
-
-const FormButton = (props) => {
-  return(
-    <div>
-      <button type="submit" className="submit-button btn btn-primary">{props.label}</button>
-    </div>
-  );
-};
-
-FormButton.propTypes = {
-  label: PropTypes.string,
-};
-
+import FormField from './FormField';
+import FormButton from './FormButton';
 
 const exampleState = {
   isSaving: false,
