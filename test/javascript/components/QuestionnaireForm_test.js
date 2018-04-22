@@ -93,6 +93,8 @@ describe('<QuestionnaireForm />', () => {
       assert.equal(undefined, wrapper.state().questions[0].error);
       assert.equal('Duplicate question name question_1', wrapper.state().questions[1].error);
       assert.equal(undefined, wrapper.state().questions[2].error);
+
+      assert.equal(true, wrapper.state().error);
     });
   });
 

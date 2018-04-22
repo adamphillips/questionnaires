@@ -62,7 +62,7 @@ class QuestionnaireForm extends React.Component {
     }
 
     if (this.state.error) {
-      return <div className="alert alert-danger">There was an error</div>;
+      return <div className="alert alert-danger">Errors with questionnaire. Please review and try again</div>;
     }
   }
 
@@ -96,6 +96,9 @@ class QuestionnaireForm extends React.Component {
       } else {
         delete newState.questions[index]['error'];
       }
+
+      newState.error = this.hasAnyErrors();
+
       this.setState(newState);
     };
   }
@@ -112,6 +115,15 @@ class QuestionnaireForm extends React.Component {
   isQuestionNameTaken(name, index) {
     for(let i=0; i < this.state.questions.length; i++) {
       if (this.state.questions[i].name === name && i != index) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  hasAnyErrors() {
+    for(let i=0; i < this.state.questions.length; i++) {
+      if (this.state.questions[i].error) {
         return true;
       }
     }
@@ -173,8 +185,7 @@ class QuestionnaireForm extends React.Component {
         {this.questions()}
         <a className="addQuestionLink" href="#" onClick={this.addQuestion}>Add question</a>
         <hr />
-        <FormButton label="Save" />
-        <p>{JSON.stringify(this.state)}</p>
+        <FormButton label="Save" disabled={this.state.error} />
       </form>
     );
   }
