@@ -27,7 +27,7 @@ FormField.propTypes = {
 const FormButton = (props) => {
   return(
     <div>
-      <button className="btn btn-primary">{props.label}</button>
+      <button type="submit" className="submit-button btn btn-primary">{props.label}</button>
     </div>
   );
 };
@@ -108,17 +108,21 @@ class QuestionnaireForm extends React.Component {
     };
   }
 
+  questionnaireData() {
+    let data = { ...this.state };
+    delete data.error;
+    delete data.isSaving;
+    return data;
+  }
+
   handleSubmit() {
     this.setState({
       error: false,
       isSaving: true
     });
 
-    $.ajax({
-      url:'/api/questionnaires',
-      method: 'post',
-      data: this.state
-    })
+    fetch('/api/questionnaires', {method: 'POST', data: JSON.stringify(this.questionnaireData())})
+      .then(res => res.json())
       .then(
         (result) => {
           this.setState({

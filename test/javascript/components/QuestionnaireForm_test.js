@@ -3,6 +3,7 @@ const assert = require('assert');
 
 import React from 'react';
 import { mount } from 'enzyme';
+import sinon from 'sinon';
 
 import QuestionnaireForm from '../../../app/javascript/components/QuestionnaireForm';
 
@@ -69,5 +70,36 @@ describe('<QuestionnaireForm />', () => {
 
     assert.equal(2, wrapper.state().questions.length);
     assert.equal('', wrapper.state().questions[1].label);
+  });
+
+  describe('saving the form', () => {
+    beforeEach(() => {
+      this.fetchSpy = sinon.spy(global, 'fetch');
+    });
+
+    afterEach(() => {
+      this.fetchSpy.restore();
+    });
+
+    it('should submit the current questionnaire data to the endpoint', () => {
+      const wrapper = mount(<QuestionnaireForm />);
+
+      const formState = {
+        title: 'Some form',
+        questions: [
+          { label: 'First question' }
+        ]
+      };
+
+      wrapper.setState(formState);
+
+      wrapper.find('form').simulate('submit');
+      assert.equal(this.fetchSpy.calledWith(
+        '/api/questionnaires', {
+          method: 'POST',
+          data: JSON.stringify(formState)
+        }
+      ), true);
+    });
   });
 });
