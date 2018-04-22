@@ -1,5 +1,0 @@
-#!/bin/bash
-
-bundle exec rake test:system
-bundle exec rake test:system
-npm run test
