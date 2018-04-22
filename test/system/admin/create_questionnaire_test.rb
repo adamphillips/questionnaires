@@ -5,7 +5,8 @@ require 'application_system_test_case'
 class CreateQuestionnaireTest < ApplicationSystemTestCase
   describe 'as an admin user' do
     it 'should be possible to create a questionnaire' do
-      visit '/admin/add-questionnaire'
+      visit '/admin'
+      click_link 'Add new'
 
       fill_in 'Title', with: 'Questionnaire 1'
 
