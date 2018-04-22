@@ -87,6 +87,11 @@ class QuestionnaireForm extends React.Component {
     if (this.state.isSaving) {
       return <div className="alert alert-info">Saving...</div>;
     }
+
+    if (this.state.success) {
+      return <div className="alert alert-info">{this.state.success}</div>;
+    }
+
     if (this.state.error) {
       return <div className="alert alert-danger">There was an error</div>;
     }
@@ -118,11 +123,18 @@ class QuestionnaireForm extends React.Component {
   }
 
   csrfToken() {
-    return document.querySelectorAll('meta[name=csrf-token]')[0].getAttribute('content');
+    let result;
+    try{
+      result = document.querySelectorAll('meta[name=csrf-token]')[0].getAttribute('content');
+    } catch(error) {
+      result = 'no-csrf-token-found';
+    }
+    return result;
   }
 
-  handleSubmit() {
+  handleSubmit(event) {
     this.setState({
+      success: false,
       error: false,
       isSaving: true
     });
@@ -141,7 +153,9 @@ class QuestionnaireForm extends React.Component {
       .then(
         (result) => {
           this.setState({
-            isSaving: false
+            isSaving: false,
+            success: result.result.message,
+            id: result.record.id
           });
         },
         (error) => {
@@ -151,6 +165,8 @@ class QuestionnaireForm extends React.Component {
           });
         }
       );
+
+    event.preventDefault();
   }
 
   render() {

@@ -3,7 +3,10 @@ const assert = require('assert');
 
 import React from 'react';
 import { mount } from 'enzyme';
+
 import sinon from 'sinon';
+import sinonStubPromise from 'sinon-stub-promise';
+sinonStubPromise(sinon);
 
 import QuestionnaireForm from '../../../app/javascript/components/QuestionnaireForm';
 
@@ -74,11 +77,11 @@ describe('<QuestionnaireForm />', () => {
 
   describe('saving the form', () => {
     beforeEach(() => {
-      this.fetchSpy = sinon.spy(global, 'fetch');
+      this.fetchStub = sinon.stub(global, 'fetch');
     });
 
     afterEach(() => {
-      this.fetchSpy.restore();
+      this.fetchStub.restore();
     });
 
     it('should submit the current questionnaire data to the endpoint', () => {
@@ -93,20 +96,41 @@ describe('<QuestionnaireForm />', () => {
 
       wrapper.setState(formState);
 
+      const expectedOptions = {
+        method: 'POST',
+        body: JSON.stringify({questionnaire: formState}),
+        headers: new Headers({
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest',
+          'X-CSRF-Token': 'some-csrf-token'
+        }),
+        credentials: 'same-origin'
+      };
+
+      const successResponse = {
+        result: {
+          message: 'Questionnaire created'
+        },
+        record: {
+          ...formState,
+          id: 123,
+        }
+      };
+
+      const response = new Response;
+      sinon.stub(response, 'json')
+        .returnsPromise()
+        .resolves(successResponse);
+
+      this.fetchStub
+        .withArgs('/api/questionnaires', expectedOptions)
+        .returnsPromise()
+        .resolves(response);
+
       wrapper.find('form').simulate('submit');
 
-      assert.equal(this.fetchSpy.calledWith(
-        '/api/questionnaires', {
-          method: 'POST',
-          body: JSON.stringify({questionnaire: formState}),
-          headers: new Headers({
-            'Content-Type': 'application/json',
-            'X-Requested-With': 'XMLHttpRequest',
-            'X-CSRF-Token': 'some-csrf-token'
-          }),
-          credentials: 'same-origin'
-        }
-      ), true);
+      assert.equal('Questionnaire created', wrapper.state().success);
+      assert.equal(123, wrapper.state().id);
     });
   });
 });
