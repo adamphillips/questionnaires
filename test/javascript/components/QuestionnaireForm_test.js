@@ -94,10 +94,17 @@ describe('<QuestionnaireForm />', () => {
       wrapper.setState(formState);
 
       wrapper.find('form').simulate('submit');
+
       assert.equal(this.fetchSpy.calledWith(
         '/api/questionnaires', {
           method: 'POST',
-          data: JSON.stringify(formState)
+          body: JSON.stringify({questionnaire: formState}),
+          headers: new Headers({
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-CSRF-Token': 'some-csrf-token'
+          }),
+          credentials: 'same-origin'
         }
       ), true);
     });

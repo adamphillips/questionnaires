@@ -109,10 +109,16 @@ class QuestionnaireForm extends React.Component {
   }
 
   questionnaireData() {
-    let data = { ...this.state };
-    delete data.error;
-    delete data.isSaving;
-    return data;
+    return {
+      questionnaire: {
+        title: this.state.title,
+        questions:this.state.questions
+      }
+    };
+  }
+
+  csrfToken() {
+    return document.querySelectorAll('meta[name=csrf-token]')[0].getAttribute('content');
   }
 
   handleSubmit() {
@@ -121,7 +127,16 @@ class QuestionnaireForm extends React.Component {
       isSaving: true
     });
 
-    fetch('/api/questionnaires', {method: 'POST', data: JSON.stringify(this.questionnaireData())})
+    fetch('/api/questionnaires', {
+      method: 'POST',
+      body: JSON.stringify(this.questionnaireData()),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': this.csrfToken()
+      }),
+      credentials: 'same-origin'
+    })
       .then(res => res.json())
       .then(
         (result) => {
