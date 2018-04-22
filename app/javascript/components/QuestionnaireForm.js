@@ -38,6 +38,8 @@ FormButton.propTypes = {
 
 
 const exampleState = {
+  isSaving: false,
+  error: false,
   title: 'Some questionnaire',
   questions: [
     { label: 'Hello' },
@@ -81,6 +83,15 @@ class QuestionnaireForm extends React.Component {
     return(fields);
   }
 
+  message() {
+    if (this.state.isSaving) {
+      return <div className="alert alert-info">Saving...</div>;
+    }
+    if (this.state.error) {
+      return <div className="alert alert-danger">There was an error</div>;
+    }
+  }
+
   handleTitleChange(event) {
     this.setState({
       title: event.target.value
@@ -97,13 +108,36 @@ class QuestionnaireForm extends React.Component {
     };
   }
 
-  handleSubmit(event) {
-    console.log('form submitted');
+  handleSubmit() {
+    this.setState({
+      error: false,
+      isSaving: true
+    });
+
+    $.ajax({
+      url:'/api/questionnaires',
+      method: 'post',
+      data: this.state
+    })
+      .then(
+        (result) => {
+          this.setState({
+            isSaving: false
+          });
+        },
+        (error) => {
+          this.setState({
+            isSaving: false,
+            error: true
+          });
+        }
+      );
   }
 
   render() {
     return (
-      <form className="form">
+      <form className="form" onSubmit={this.handleSubmit}>
+        {this.message()}
         <FormField id="title" label="Title" value={this.state.title} onChange={this.handleTitleChange} />
         {this.questions()}
         <a className="addQuestionLink" href="#" onClick={this.addQuestion}>Add question</a>

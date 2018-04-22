@@ -6,6 +6,7 @@ module Api
       it 'should return 200 status' do
         post '/api/questionnaires'
         assert_equal 200, response.status
+        assert_equal 'Questionnaire created', JSON.parse(response.body)['message']
       end
     end
   end

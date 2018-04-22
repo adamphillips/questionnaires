@@ -3,7 +3,8 @@
 module Api
   class QuestionnairesController < ApplicationController
     def create
-      render plain: 'It worked', status: 200
+      Rails.logger.info params.inspect
+      render json: {message: 'Questionnaire created'}
     end
   end
 end
