@@ -3,9 +3,16 @@ import PropTypes from 'prop-types';
 
 const FormField = (props) => {
   return(
-    <div>
+    <div className="form-group">
       <label htmlFor={props.id}>{props.label}</label>
-      <input id={props.id} name={props.id} value={props.value} onChange={props.onChange} />
+      <input
+        type="text"
+        id={props.id}
+        name={props.id}
+        value={props.value}
+        onChange={props.onChange}
+        className="form-control"
+      />
     </div>
   );
 };
@@ -20,7 +27,7 @@ FormField.propTypes = {
 const FormButton = (props) => {
   return(
     <div>
-      <button>{props.label}</button>
+      <button className="btn btn-primary">{props.label}</button>
     </div>
   );
 };
