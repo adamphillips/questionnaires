@@ -20,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
       </Router>
     </Provider>,
-    document.body.appendChild(document.getElementById('admin-app'))
+    document.getElementById('admin-app')
   );
 });
