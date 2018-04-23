@@ -8,7 +8,7 @@ const stub_request = (fetchStub, { url, options, responseData }) => {
     .returnsPromise()
     .resolves(responseData);
 
-  this.fetchStub
+  fetchStub
     .withArgs(url, options)
     .returnsPromise()
     .resolves(response);
