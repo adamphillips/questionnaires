@@ -1,0 +1,10 @@
+<h1><%= questionnaire_form.title %></h1>
+
+<%= simple_form_for :questionnaire, url: submit_questionnaire_path, html: { class: 'form' } do |form| %>
+
+  <% questionnaire_form.questions.each do |question| %>
+    <%= form.input question.form_field, label: question.label, required: true %>
+  <% end %>
+
+  <%= form.submit 'Submit', class: 'btn btn-primary' %>
+<% end %>
