@@ -9,7 +9,10 @@ module Api
         result: {
           message: 'Questionnaire created'
         },
-        record: questionnaire
+        record: QuestionnaireAsJson.new(
+          questionnaire,
+          url: questionnaire_url(questionnaire)
+        )
       }
     end
 

@@ -21,7 +21,11 @@ module Api
         assert_equal 'Questionnaire created', json_response[:result][:message]
 
         assert_equal 'Some questionnaire', json_response[:record][:title]
-        assert_equal Questionnaire.last.id, json_response[:record][:id]
+
+        new_questionnaire = Questionnaire.last
+
+        assert_equal new_questionnaire.id, json_response[:record][:id]
+        assert_equal questionnaire_url(new_questionnaire), json_response[:record][:url]
       end
     end
 
