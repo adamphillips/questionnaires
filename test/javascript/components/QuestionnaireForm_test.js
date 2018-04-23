@@ -8,6 +8,8 @@ import sinon from 'sinon';
 import sinonStubPromise from 'sinon-stub-promise';
 sinonStubPromise(sinon);
 
+import stub_request from '../support/stub_request';
+
 import QuestionnaireForm from '../../../app/javascript/components/QuestionnaireForm';
 
 describe('<QuestionnaireForm />', () => {
@@ -139,16 +141,14 @@ describe('<QuestionnaireForm />', () => {
           id: 123,
         }
       };
-
-      const response = new Response;
-      sinon.stub(response, 'json')
-        .returnsPromise()
-        .resolves(successResponse);
-
-      this.fetchStub
-        .withArgs('/api/questionnaires', expectedOptions)
-        .returnsPromise()
-        .resolves(response);
+      stub_request(
+        this.fetchStub,
+        {
+          url: '/api/questionnaires',
+          options: expectedOptions,
+          responseData: successResponse
+        }
+      );
 
       wrapper.find('form').simulate('submit');
 
