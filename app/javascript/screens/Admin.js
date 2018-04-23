@@ -7,7 +7,11 @@ import QuestionnaireList from '../components/QuestionnaireList';
 const Admin = () => {
   return(
     <div>
-      <Link to="/add-questionnaire">Add new</Link>
+      <h1>Questionnaire admin</h1>
+      <p>
+        <Link to="/add-questionnaire">Add new</Link>
+      </p>
+
       <QuestionnaireList />
     </div>
   );
