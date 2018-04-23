@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class QuestionnairesController < ApplicationController
-  helper_method :questionnaire_form
+  helper_method :questionnaire, :questionnaire_form
 
   def show
   end
@@ -11,13 +11,16 @@ class QuestionnairesController < ApplicationController
       .new(questionnaire_form)
       .call(questionnaire_response_params) do |response|
       response.on(:success) do
-        redirect_to :thanks
+        redirect_to thanks_questionnaire_url(questionnaire)
       end
 
       response.on(:validation_error) do
         render 'show'
       end
     end
+  end
+
+  def thanks
   end
 
   private

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :questionnaires, only: [:show] do
     member do
       post 'submit' => 'questionnaires#submit'
+      get 'thanks' => 'questionnaires#thanks'
     end
   end
 end
