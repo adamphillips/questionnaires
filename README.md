@@ -22,7 +22,7 @@ Once installed you can start the application by running
 bin/rails s
 ```
 
-## Running the tests
+## Tests
 
 There are three types of tests used by the application.
 
@@ -62,17 +62,39 @@ During development they can also be run in watch mode using
 npm run test:watch
 ```
 
+### Run entire suite
+
+It is possible to run the entire suite of tests using
+
+```
+test/run-all
+```
+
+### Testing philosophy
+
+The system tests were used to drive the development of the application. Rails integration and React component tests where then added as required.
+
+Where functionality has been implicitly tested through a higher-level test, for expediency lower-level component or unit tests have not necessarily been created. In a real world example these would also be added where appropriate.
+
 ## Using the application
 
-Once the application is running, you can visit http://localhost:3000. This will show a page with links to all the configured questionnaires and a link to the admin area for adding new questionnaires.
+Once the application is running, you can visit http://localhost:3000. This will redirect to a page with links to all the configured questionnaires and a link to the admin area for adding new questionnaires.
+
+## Navigating the code
+
+The application follows standard Rails conventions where applicable however for clarity a few locations are worth noting
+
+The javascript files are in `app/javascript`.
+The packs folder contains `admin.js` which mounts the React app onto the DOM.
+The javascript tests are in `test/javascript`
 
 ## Application design
 
 The following section talks about some of the design decisions made when creating the application, possible alternatives and why these solutions were chosen.
 
-### React admin app
+### Admin React app
 
-The admin app uses React. It communicates with the Rails application via REST endpoints. The Rails application handles the persistence. The admin app was written in React as one of the key features was to be able to dynamically add new questions. This kind of dynamic form manipulation is better suited to a front-end application. When working with multi-language applications it is useful to have a clear boundary between the two therefore the entire admin application is written in React
+The admin app uses React. It communicates with the Rails application via REST endpoints. The Rails application handles the persistence. The admin app was written in React as one of the key features was to be able to dynamically add new questions. This kind of dynamic form manipulation is better suited to a front-end application. When working with multi-language applications it is useful to have a clear boundary between the two therefore the entire admin application is written in React.
 
 In contrast, there is less benefit to the end user in having a front-end application to complete the questionnaire. Therefore it is simpler to handle this entirely through Rails.
 
