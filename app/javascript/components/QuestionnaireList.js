@@ -33,7 +33,11 @@ class QuestionnaireList extends React.Component {
 
   questionnaires() {
     return this.state.questionnaires.map((questionnaire) => {
-      return <Link key={questionnaire.id} to={`/admin/questionnaires/${questionnaire.id}`}>{questionnaire.title}</Link>;
+      return(
+        <p key={questionnaire.id}>
+          <Link to={`/questionnaires/${questionnaire.id}`}>{questionnaire.title}</Link>
+        </p>
+      );
     });
   }
 
