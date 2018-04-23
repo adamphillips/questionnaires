@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_22_171857) do
+ActiveRecord::Schema.define(version: 2018_04_23_105249) do
+
+  create_table "questionnaire_responses", force: :cascade do |t|
+    t.integer "questionnaire_id"
+    t.string "person_name"
+    t.json "answers"
+    t.index ["questionnaire_id"], name: "index_questionnaire_responses_on_questionnaire_id"
+  end
 
   create_table "questionnaires", force: :cascade do |t|
     t.string "title"
