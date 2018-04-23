@@ -11,7 +11,7 @@ const QuestionnaireQuestion = (props) => {
     <div>
       <h2 className="h4">Question {props.index + 1}</h2>
 
-      <div className='form-row'>
+      <div id={`question-group-${props.index + 1}`} className='form-row'>
         <div className='col-md'>
           <FormField
             id={question_name_id}

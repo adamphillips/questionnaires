@@ -10,10 +10,17 @@ class CreateQuestionnaireTest < ApplicationSystemTestCase
 
       fill_in 'Title', with: 'Questionnaire 1'
 
-      fill_in 'Question 1', with: 'How are you?'
+      within '#question-group-1' do
+        fill_in 'Name', with: 'welcome'
+        fill_in 'Question', with: 'How are you?'
+      end
 
       click_link 'Add question'
-      fill_in 'Question 2', with: 'What is your favourite colour?'
+
+      within '#question-group-2' do
+        fill_in 'Name', with: 'colour'
+        fill_in 'Question', with: 'What is your favourite colour?'
+      end
 
       click_button 'Save'
 
