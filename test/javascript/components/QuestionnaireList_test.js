@@ -12,7 +12,7 @@ import stub_request from '../support/stub_request';
 
 import QuestionnaireList from '../../../app/javascript/components/QuestionnaireList';
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom';
 
 describe('<QuestionnaireList />', () => {
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe('<QuestionnaireList />', () => {
 
     const wrapper = mount(<BrowserRouter><QuestionnaireList /></BrowserRouter>);
 
-    assert.equal(wrapper.find('a[href="/admin/questionnaires/1"]').length, 1);
-    assert.equal(wrapper.find('a[href="/admin/questionnaires/2"]').length, 1);
+    assert.equal(wrapper.find('a[href="/questionnaires/1"]').length, 1);
+    assert.equal(wrapper.find('a[href="/questionnaires/2"]').length, 1);
   });
 });
