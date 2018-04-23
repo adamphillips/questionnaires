@@ -23,7 +23,10 @@ class QuestionnaireResponse extends React.Component {
   render() {
     return(
       <div className='response'>
-        <h2 className='h3'>{this.props.person_name}</h2>
+        <h2 className='h3'>
+          {this.props.person_name}
+        </h2>
+        <p>Submitted {this.props.created_at}</p>
         {this.answers()}
       </div>
     );
@@ -32,6 +35,7 @@ class QuestionnaireResponse extends React.Component {
 
 QuestionnaireResponse.propTypes = {
   person_name: PropTypes.string,
+  created_at: PropTypes.string,
   answers: PropTypes.object
 };
 

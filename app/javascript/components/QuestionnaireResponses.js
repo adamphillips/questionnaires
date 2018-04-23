@@ -38,14 +38,17 @@ class QuestionnaireResponses extends React.Component {
   responseLinks() {
     return(
       this.state.questionnaire.questionnaire_responses.map((response, index) => {
-        return <a
-          key={index}
-          className='response-link'
-          href='#'
-          onClick={this.responseLinkHandler(response)}
-        >
-          {response.person_name}
-        </a>;
+        return (
+          <p key={index}>
+            <a
+              className='response-link'
+              href='#'
+              onClick={this.responseLinkHandler(response)}
+            >
+              {response.person_name}
+            </a>
+          </p>
+        );
       })
     );
   }
@@ -71,7 +74,11 @@ class QuestionnaireResponses extends React.Component {
     }
 
     return(
-      <QuestionnaireResponse person_name={currentResponse.person_name} answers={currentResponse.answers} />
+      <QuestionnaireResponse
+        person_name={currentResponse.person_name}
+        answers={currentResponse.answers}
+        created_at={currentResponse.created_at}
+      />
     );
   }
 

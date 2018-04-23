@@ -24,7 +24,7 @@ class CreateQuestionnaireTest < ApplicationSystemTestCase
 
       click_button 'Save'
 
-      assert page.has_content?('Questionnaire created')
+      assert page.has_content?(/Your questionnaire has been saved/)
     end
   end
 end

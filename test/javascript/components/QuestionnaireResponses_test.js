@@ -25,6 +25,7 @@ describe('<QuestionnaireResponses />', () => {
     const response1 = {
       id: 1,
       person_name: 'Adam 1',
+      created_at: '12:34',
       answers: {
         question_1: {
           question: 'Question 1.1',
@@ -40,6 +41,7 @@ describe('<QuestionnaireResponses />', () => {
     const response2 = {
       id: 2,
       person_name: 'Adam 2',
+      created_at: '01:23',
       answers: {
         question_1: {
           question: 'Question 2.1',

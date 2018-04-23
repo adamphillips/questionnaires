@@ -51,6 +51,7 @@ module Api
 
         create :questionnaire_response, questionnaire: q1,
           person_name: 'Some one',
+          created_at: DateTime.new(2018, 04, 23, 10, 10, 0),
           answers: {
             question_1: {
               question: 'Some question',
@@ -61,6 +62,7 @@ module Api
         get "/api/questionnaires/#{q1.id}"
 
         assert_equal 'Questionnaire 1', json_response[:title]
+        assert_equal 'April 23, 2018 10:10', json_response[:questionnaire_responses][0][:created_at]
         assert_equal 'Some answer', json_response[:questionnaire_responses][0][:answers][:question_1][:value]
       end
     end
