@@ -9,10 +9,12 @@ Rails.application.routes.draw do
     resources :questionnaires, only: [:index, :create, :show]
   end
 
-  resources :questionnaires, only: [:show] do
+  resources :questionnaires, only: [:index, :show] do
     member do
       post 'submit' => 'questionnaires#submit'
       get 'thanks' => 'questionnaires#thanks'
     end
   end
+
+  root to: redirect('/questionnaires')
 end

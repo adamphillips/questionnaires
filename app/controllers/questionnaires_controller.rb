@@ -3,6 +3,10 @@
 class QuestionnairesController < ApplicationController
   helper_method :questionnaire, :questionnaire_form
 
+  def index
+    @questionnaires = Questionnaire.all.order(:title)
+  end
+
   def show
   end
 

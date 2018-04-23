@@ -7,12 +7,14 @@ require 'support/factory_bot'
 class CompleteQuestionnaireTest < ApplicationSystemTestCase
   describe 'as a user' do
     it 'should be possible to complete a questionnaire' do
-      questionnaire = create :questionnaire, title: 'Test questionnaire', questions: [
+      create :questionnaire, title: 'Test questionnaire', questions: [
         { label: 'Question 1', name: 'question_1' },
         { label: 'Question 2', name: 'question_2' }
       ]
 
-      visit questionnaire_url(questionnaire)
+      visit root_url
+
+      click_link 'Test questionnaire'
 
       fill_in 'Please enter your name', with: 'Adam'
       fill_in 'Question 1', with: 'Answer 1'
