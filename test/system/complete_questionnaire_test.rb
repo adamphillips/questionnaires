@@ -14,6 +14,7 @@ class CompleteQuestionnaireTest < ApplicationSystemTestCase
 
       visit questionnaire_url(questionnaire)
 
+      fill_in 'Please enter your name', with: 'Adam'
       fill_in 'Question 1', with: 'Answer 1'
       fill_in 'Question 2', with: 'Answer 2'
 
