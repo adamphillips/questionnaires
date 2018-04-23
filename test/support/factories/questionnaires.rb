@@ -3,8 +3,8 @@ FactoryBot.define do
     trait :simple do
       title  'A simple questionnaire'
       questions [
-        { name: 'question_1', label: 'The first question' },
-        { name: 'question_2', label: 'The second question' }
+        { 'name' => 'first_question', 'label' => 'The first question' },
+        { 'name' => 'second_question', 'label' => 'The second question' }
       ]
     end
   end
