@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   namespace :api do
     post 'questionnaires' => 'questionnaires#create'
   end
+
+  get 'questionnaire/:id' => 'questionnaires#show', as: :questionnaire
 end
