@@ -4,6 +4,8 @@ import QuestionnaireQuestion from './QuestionnaireQuestion';
 import FormField from './FormField';
 import FormButton from './FormButton';
 
+import csrf_token from '../util/csrf_token';
+
 const defaultState = {
   isSaving: false,
   error: false,
@@ -129,16 +131,6 @@ class QuestionnaireForm extends React.Component {
     return false;
   }
 
-  csrfToken() {
-    let result;
-    try{
-      result = document.querySelectorAll('meta[name=csrf-token]')[0].getAttribute('content');
-    } catch(error) {
-      result = 'no-csrf-token-found';
-    }
-    return result;
-  }
-
   handleSubmit(event) {
     this.setState({
       success: false,
@@ -152,7 +144,7 @@ class QuestionnaireForm extends React.Component {
       headers: new Headers({
         'Content-Type': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRF-Token': this.csrfToken()
+        'X-CSRF-Token': csrf_token()
       }),
       credentials: 'same-origin'
     })
@@ -177,6 +169,14 @@ class QuestionnaireForm extends React.Component {
   }
 
   render() {
+    if (this.state.success) {
+      return(
+        <p>
+          Your questionnaire has been saved.
+          <a href={`/admin/questionnaires/${this.state.id}`}>Click here</a> to view responses.
+        </p>
+      );
+    }
     return (
       <form className="form" onSubmit={this.handleSubmit}>
         {this.message()}
