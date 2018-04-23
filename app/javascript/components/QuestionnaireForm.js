@@ -12,7 +12,10 @@ const defaultState = {
   title: '',
   questions: [
     { label: '', name: '' }
-  ]
+  ],
+  id: null,
+  success: false,
+  url: null
 };
 
 class QuestionnaireForm extends React.Component {
@@ -56,10 +59,6 @@ class QuestionnaireForm extends React.Component {
   message() {
     if (this.state.isSaving) {
       return <div className="alert alert-info">Saving...</div>;
-    }
-
-    if (this.state.success) {
-      return <div className="alert alert-info">{this.state.success}</div>;
     }
 
     if (this.state.error) {
@@ -154,7 +153,8 @@ class QuestionnaireForm extends React.Component {
           this.setState({
             isSaving: false,
             success: result.result.message,
-            id: result.record.id
+            id: result.record.id,
+            url: result.record.url
           });
         },
         (error) => {
@@ -172,8 +172,8 @@ class QuestionnaireForm extends React.Component {
     if (this.state.success) {
       return(
         <p>
-          Your questionnaire has been saved.
-          <a href={`/admin/questionnaires/${this.state.id}`}>Click here</a> to view responses.
+          Your questionnaire has been saved. 
+          <a href={this.state.url}>Click here</a> to complete it.
         </p>
       );
     }
