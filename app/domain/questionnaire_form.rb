@@ -2,10 +2,14 @@
 
 class QuestionnaireForm < Form
 
-  attr_accessor :title
+  attr_accessor :person_name
+  validates :person_name, presence: true
+
+  attr_reader :questionnaire
 
   def initialize(questionnaire)
     @questionnaire = questionnaire
+    define_validated_accessors_for_questions
   end
 
   def title
@@ -20,7 +24,14 @@ class QuestionnaireForm < Form
 
   private
 
-  attr_reader :questionnaire
+  def define_validated_accessors_for_questions
+    questions.each do |question|
+      self.singleton_class.class_eval do
+        attr_accessor question.form_field
+        validates question.form_field, presence: true
+      end
+    end
+  end
 
   Question = Struct.new(:index, :name, :label) do
     FORM_FIELD_NAME = 'question_%{index}'
