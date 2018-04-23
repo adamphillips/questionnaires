@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2018_04_23_105249) do
     t.integer "questionnaire_id"
     t.string "person_name"
     t.json "answers"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["questionnaire_id"], name: "index_questionnaire_responses_on_questionnaire_id"
   end
 
