@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Link } from 'react-router-dom';
 
@@ -11,6 +12,10 @@ const ViewQuestionnaire = (props) => {
       <QuestionnaireResponses id={Number(props.match.params.id)} />
     </div>
   );
+};
+
+ViewQuestionnaire.propTypes = {
+  match: PropTypes.object
 };
 
 export default ViewQuestionnaire;
