@@ -9,5 +9,9 @@ Rails.application.routes.draw do
     post 'questionnaires' => 'questionnaires#create'
   end
 
-  resources :questionnaires, only: [:show, :create]
+  resources :questionnaires, only: [:show] do
+    member do
+      post 'submit' => 'questionnaires#submit'
+    end
+  end
 end
