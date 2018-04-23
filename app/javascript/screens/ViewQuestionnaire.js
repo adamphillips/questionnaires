@@ -8,7 +8,7 @@ const ViewQuestionnaire = (props) => {
   return(
     <div>
       <Link to='/'>Back to home</Link>
-      <QuestionnaireResponses id={props.match.params.id} />
+      <QuestionnaireResponses id={Number(props.match.params.id)} />
     </div>
   );
 };

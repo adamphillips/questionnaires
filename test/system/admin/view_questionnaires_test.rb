@@ -26,8 +26,6 @@ module Admin
 
         click_link 'A simple questionnaire'
 
-        assert page.has_content?('2 responses')
-
         click_link 'Person 1'
         assert page.has_content?('The first answer')
 

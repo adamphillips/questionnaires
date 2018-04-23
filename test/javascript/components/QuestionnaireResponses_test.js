@@ -28,11 +28,11 @@ describe('<QuestionnaireResponses />', () => {
       answers: {
         question_1: {
           question: 'Question 1.1',
-          value: 'Answer 1.1'
+          answer: 'Answer 1.1'
         },
         question_2: {
           question: 'Question 1.2',
-          value: 'Answer 1.2'
+          answer: 'Answer 1.2'
         }
       }
     };
@@ -43,11 +43,11 @@ describe('<QuestionnaireResponses />', () => {
       answers: {
         question_1: {
           question: 'Question 2.1',
-          value: 'Answer 2.1'
+          answer: 'Answer 2.1'
         },
         question_2: {
           question: 'Question 2.2',
-          value: 'Answer 2.2'
+          answer: 'Answer 2.2'
         }
       }
     };
@@ -60,7 +60,7 @@ describe('<QuestionnaireResponses />', () => {
         responseData: {
           id: 1,
           title: 'Some questionnaire',
-          responses: [response1, response2]
+          questionnaire_responses: [response1, response2]
         }
       }
     );

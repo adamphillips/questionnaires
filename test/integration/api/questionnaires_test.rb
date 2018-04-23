@@ -4,7 +4,7 @@ require 'support/factory_bot'
 
 module Api
   class QuestionnairesTest < ActionDispatch::IntegrationTest
-    describe 'GET /api/questionnaire' do
+    describe 'GET /api/questionnaires' do
       it 'should return JSON containing the id and title of all the questionnaires' do
         q1 = create :questionnaire, title: 'Questionnaire 1'
         q2 = create :questionnaire, title: 'Questionnaire 2'
@@ -42,6 +42,26 @@ module Api
 
         assert_equal new_questionnaire.id, json_response[:record][:id]
         assert_equal questionnaire_url(new_questionnaire), json_response[:record][:url]
+      end
+    end
+
+    describe 'GET /api/questionnaires/:id' do
+      it 'should return JSON containing the details of the specified questionnaire' do
+        q1 = create :questionnaire, title: 'Questionnaire 1'
+
+        create :questionnaire_response, questionnaire: q1,
+          person_name: 'Some one',
+          answers: {
+            question_1: {
+              question: 'Some question',
+              value: 'Some answer'
+            }
+          }
+
+        get "/api/questionnaires/#{q1.id}"
+
+        assert_equal 'Questionnaire 1', json_response[:title]
+        assert_equal 'Some answer', json_response[:questionnaire_responses][0][:answers][:question_1][:value]
       end
     end
 

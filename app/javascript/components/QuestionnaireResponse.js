@@ -2,12 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class QuestionnaireResponse extends React.Component {
+  answersAsArray() {
+    return Object.keys(this.props.answers).reduce((o, k) => {
+      o.push(Object.assign({key: k}, this.props.answers[k]));
+      return o;
+    }, []);
+  }
+
   answers() {
-    return this.props.answers.each((answer) => {
+    return this.answersAsArray().map((answer) => {
       return(
-        <div>
+        <div key={answer.key}>
           <h3 className='h5'>{answer.question}</h3>
-          <p>{answer.value}</p>
+          <p>{answer.answer}</p>
         </div>
       );
     });
@@ -17,6 +24,7 @@ class QuestionnaireResponse extends React.Component {
     return(
       <div className='response'>
         <h2 className='h3'>{this.props.person_name}</h2>
+        {this.answers()}
       </div>
     );
   }

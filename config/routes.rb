@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    resources :questionnaires, only: [:index, :create]
+    resources :questionnaires, only: [:index, :create, :show]
   end
 
   resources :questionnaires, only: [:show] do

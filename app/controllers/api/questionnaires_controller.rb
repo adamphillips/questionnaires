@@ -20,6 +20,17 @@ module Api
       }
     end
 
+    def show
+      render json: Questionnaire.find(params[:id]).as_json(
+        only: [:title],
+        include: {
+          questionnaire_responses: {
+            only: [:person_name, :answers]
+          }
+        }
+      )
+    end
+
     private
 
     def questionnaire_params
