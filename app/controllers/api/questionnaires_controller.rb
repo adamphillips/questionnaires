@@ -19,7 +19,7 @@ module Api
     private
 
     def questionnaire_params
-      params.require(:questionnaire).permit(:title, questions: [:label])
+      params.require(:questionnaire).permit(:title, questions: [:name, :label])
     end
   end
 end
