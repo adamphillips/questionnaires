@@ -1,7 +1,23 @@
 require 'test_helper'
 
+require 'support/factory_bot'
+
 module Api
   class QuestionnairesTest < ActionDispatch::IntegrationTest
+    describe 'GET /api/questionnaire' do
+      it 'should return JSON containing the id and title of all the questionnaires' do
+        q1 = create :questionnaire, title: 'Questionnaire 1'
+        q2 = create :questionnaire, title: 'Questionnaire 2'
+
+        get '/api/questionnaires'
+
+        assert_equal q1.id, json_response[:questionnaires][0][:id]
+        assert_equal 'Questionnaire 1', json_response[:questionnaires][0][:title]
+        assert_equal q2.id, json_response[:questionnaires][1][:id]
+        assert_equal 'Questionnaire 2', json_response[:questionnaires][1][:title]
+      end
+    end
+
     describe 'POST /api/questionnaires' do
       let (:questionnaire_data) {
         {
@@ -30,7 +46,7 @@ module Api
     end
 
     def json_response
-      JSON.parse(response.body).deep_symbolize_keys
+      @json_response ||= JSON.parse(response.body).deep_symbolize_keys
     end
   end
 end

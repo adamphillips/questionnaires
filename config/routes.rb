@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    post 'questionnaires' => 'questionnaires#create'
+    resources :questionnaires, only: [:index, :create]
   end
 
   resources :questionnaires, only: [:show] do

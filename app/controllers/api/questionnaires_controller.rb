@@ -2,6 +2,10 @@
 
 module Api
   class QuestionnairesController < ApplicationController
+    def index
+      render json: { questionnaires: Questionnaire.all.as_json(only: [:id, :title]) }
+    end
+
     def create
       questionnaire = Questionnaire.create(questionnaire_params)
 
