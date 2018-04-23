@@ -9,5 +9,5 @@ Rails.application.routes.draw do
     post 'questionnaires' => 'questionnaires#create'
   end
 
-  get 'questionnaire/:id' => 'questionnaires#show', as: :questionnaire
+  resources :questionnaires, only: [:show, :create]
 end
