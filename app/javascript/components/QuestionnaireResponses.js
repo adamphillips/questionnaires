@@ -88,8 +88,14 @@ class QuestionnaireResponses extends React.Component {
     return(
       <div>
         <h1>{questionnaire.title}</h1>
-        {this.responseLinks()}
-        {this.response()}
+        <div className="row">
+          <div className='col-3'>
+            {this.responseLinks()}
+          </div>
+          <div className='col-9'>
+            {this.response()}
+          </div>
+        </div>
       </div>
     );
   }
