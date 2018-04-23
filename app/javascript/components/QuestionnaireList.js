@@ -19,7 +19,7 @@ class QuestionnaireList extends React.Component {
         (result) => {
           this.setState({
             isLoaded: true,
-            questionnaires: result
+            questionnaires: result.questionnaires
           });
         },
         (error) => {

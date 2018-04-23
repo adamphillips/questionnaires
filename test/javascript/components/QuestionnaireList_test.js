@@ -29,16 +29,18 @@ describe('<QuestionnaireList />', () => {
       {
         url: '/api/questionnaires',
         options: {},
-        responseData: [
-          {
-            id: 1,
-            title: 'Questionnaire1'
-          },
-          {
-            id: 2,
-            title: 'Questionnaire2'
-          }
-        ]
+        responseData: {
+          questionnaires: [
+            {
+              id: 1,
+              title: 'Questionnaire1'
+            },
+            {
+              id: 2,
+              title: 'Questionnaire2'
+            }
+          ]
+        }
       }
     );
 
