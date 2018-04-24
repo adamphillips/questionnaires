@@ -10,7 +10,13 @@ In order to run the application, you first need to install the dependencies. Thi
 bin/setup
 ```
 
-in the root folder of the application. Note that if you want to use an isolated Ruby environment via RVM etc you should set this up first.
+in the root folder of the application.
+
+Note that if you want to use an isolated Ruby environment via RVM etc you should set this up first. Note that the application already contains a .ruby-version file targeting 2.3.3 as is standard behaviour for a new Rails app. You may also wish to create a .ruby-gemset file to create a specific gemset for the application. For example
+
+```
+echo questionnaires > .ruby-gemset
+```
 
 The application was build and tested with Ruby 2.3.3, node 8.9.4 and npm 5.7.1.
 
@@ -21,6 +27,10 @@ Once installed you can start the application by running
 ```
 bin/rails s
 ```
+
+The application will by default run on port 3000 and you can access it at
+
+http://localhost:3000
 
 ## Tests
 
@@ -46,6 +56,8 @@ They can be run using
 rake test
 ```
 
+The Rails test suite uses minitest/spec and factory_bot.
+
 ### Front-end javascript tests
 
 These test the React front-end admin area application.
@@ -62,6 +74,8 @@ During development they can also be run in watch mode using
 npm run test:watch
 ```
 
+The javascript test suite uses mocha, enzyme and sinon.
+
 ### Run entire suite
 
 It is possible to run the entire suite of tests using
@@ -74,7 +88,7 @@ test/run-all
 
 The system tests were used to drive the development of the application. Rails integration and React component tests where then added as required.
 
-Where functionality has been implicitly tested through a higher-level test, for expediency lower-level component or unit tests have not necessarily been created. In a real world example these would also be added where appropriate.
+For expediency, where functionality has been implicitly tested through a higher-level test, lower-level component or unit tests have not necessarily been created. In a real world example these would also be added where appropriate.
 
 ## Using the application
 
@@ -84,9 +98,10 @@ Once the application is running, you can visit http://localhost:3000. This will 
 
 The application follows standard Rails conventions where applicable however for clarity a few locations are worth noting
 
-The javascript files are in `app/javascript`.
-The packs folder contains `admin.js` which mounts the React app onto the DOM.
-The javascript tests are in `test/javascript`
+- The javascript files are in `app/javascript`.
+- The packs folder contains `admin.js` which mounts the React app onto the DOM.
+- The javascript tests are in `test/javascript`.
+- Rails classes that are not one of the standard Rails types are in `app/domain`.
 
 ## Application design
 
@@ -107,3 +122,7 @@ The questionnaire schema is persisted as a single blob of JSON. This is simple a
 The response data is also persisted as a single JSON object. It contains both the answer and the original question. This means that if the questionnaire is later modified, it is still possible to see the question that was asked at the time of the questionnaire being submitted.
 
 Should particular answers be required for analysis later these can easily be extracted to separate tables / columns as required given that both SQLite and Postgres (the production database of choice) support operations on columns with JSON datatype.
+
+## Responsive behaviour
+
+Whilst the UI of the application is fairly sparse it is responsive. The UI uses the bootstrap framework with specific responsive behavioural classes applied where appropriate.
