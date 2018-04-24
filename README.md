@@ -16,6 +16,7 @@ Note that if you want to use an isolated Ruby environment via RVM etc you should
 
 ```
 echo questionnaires > .ruby-gemset
+rvm use 2.3.3@questionnaires
 ```
 
 The application was build and tested with Ruby 2.3.3, node 8.9.4 and npm 5.7.1.
