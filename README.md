@@ -1,6 +1,6 @@
 # Questionnaires example app
 
-This is an example questionnaires app built using Rails and React
+This is an example questionnaires app built using Rails and React. The original brief is available at [brief.md](brief.md).
 
 ## Setup
 
