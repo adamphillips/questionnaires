@@ -12,14 +12,14 @@ bin/setup
 
 in the root folder of the application.
 
-Note that if you want to use an isolated Ruby environment via RVM etc you should set this up first. Note that the application already contains a .ruby-version file targeting 2.3.3 as is standard behaviour for a new Rails app. You may also wish to create a .ruby-gemset file to create a specific gemset for the application. For example
+Note that if you want to use an isolated Ruby environment via RVM etc you should set this up first. Note that the application already contains a .ruby-version file targeting 2.6.6 as is standard behaviour for a new Rails app. You may also wish to create a .ruby-gemset file to create a specific gemset for the application. For example
 
 ```
 echo questionnaires > .ruby-gemset
-rvm use 2.3.3@questionnaires
+rvm use 2.6.6@questionnaires
 ```
 
-The application was build and tested with Ruby 2.3.3, node 8.9.4 and npm 5.7.1.
+The application was build and tested with Ruby 2.6.6, node 8.9.4 and npm 5.7.1.
 
 This script will also create the SQLite database for the application.
 
