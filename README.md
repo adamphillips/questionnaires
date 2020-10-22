@@ -43,7 +43,7 @@ These are full-stack tests that run in a browser. They check that the applicatio
 They can be run using
 
 ```
-rake test:system
+bundle exec rake test:system
 ```
 
 ### Rails application tests
@@ -53,7 +53,7 @@ These test the Rails application.
 They can be run using
 
 ```
-rake test
+bundle exec rake test
 ```
 
 The Rails test suite uses minitest/spec and factory_bot.
